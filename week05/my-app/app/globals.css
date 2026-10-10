@@ -1,0 +1,72 @@
+body {
+  background: #fff5e6;
+  font-family: sans-serif;
+}
+
+.app {
+  max-width: 500px;
+  margin: 50px auto;
+  text-align: center;
+}
+
+h1 {
+  color: #ff7a00;
+}
+
+input[type="text"] {
+  padding: 10px;
+  margin-right: 10px;
+  border: 2px solid #ff7a00;
+  border-radius: 5px;
+}
+
+input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  margin: 0;
+  padding: 0;
+  accent-color: #ff7a00;
+  flex-shrink: 0;
+}
+
+button {
+  padding: 8px 12px;
+  margin: 3px;
+  background: #ff7a00;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button.small {
+  padding: 4px 8px;
+  margin: 0;
+  font-size: 12px;
+}
+
+ul {
+  margin: 16px 0 0;
+  padding: 0;
+}
+
+li {
+  list-style: none;
+  margin: 8px 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 8px;
+  text-align: left;
+}
+
+li span {
+  flex: 1;
+  text-align: left;
+  word-break: break-word;
+}
+
+.completed span {
+  text-decoration: line-through;
+  color: gray;
+}
