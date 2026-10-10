@@ -2,7 +2,7 @@
 
 1학기 React 투두리스트(`week05/todo-project`)를 Next.js로 옮기고, Vercel과 GitHub Actions로 자동 배포
 
-배포 주소: 
+배포 주소: https://week05-todo.vercel.app/
 
 ## React 버전과 Next.js 버전의 차이
 
