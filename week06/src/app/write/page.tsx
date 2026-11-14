@@ -1,6 +1,17 @@
 import PageNavButtons from "@/components/PageNavButtons";
+import { authOptions } from "@/pages/api/auth/[...nextauth]";
+import { getServerSession } from "next-auth";
 
-export default function Write() {
+export default async function Write() {
+  const session = await getServerSession(authOptions);
+
+  if (!session) {
+    return (
+      <p className="rounded-xl border-2 border-dashed border-[#f3e8c8] py-16 text-center text-sm text-stone-500">
+        로그인 후 글을 작성할 수 있습니다.
+      </p>
+    );
+  }
   return (
     <div>
       <h4 className="mb-6 font-display text-3xl">작성 페이지</h4>

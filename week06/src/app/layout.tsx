@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { Gowun_Dodum, Jua } from "next/font/google";
 import "./globals.css";
+import Header from "@/components/Header";
+import { authOptions } from "@/pages/api/auth/[...nextauth]";
+import { getServerSession } from "next-auth";
 
 const gowunDodum = Gowun_Dodum({
   weight: "400",
@@ -20,23 +22,12 @@ export const metadata: Metadata = {
   description: "Next.js + MongoDB 게시판",
 };
 
-export default function RootLayout({ children }: LayoutProps<"/">) {
+export default async function RootLayout({ children }: LayoutProps<"/">) {
+  const session = await getServerSession(authOptions);
   return (
     <html lang="ko" className={`${gowunDodum.variable} ${jua.variable}`}>
       <body className="min-h-screen bg-white font-sans text-black antialiased">
-        <header className="bg-[#fbf6e4]">
-          <nav className="mx-auto flex h-14 max-w-2xl items-center justify-between px-4">
-            <Link href="/" className="font-display text-xl text-black">
-              게시판
-            </Link>
-            <Link
-              href="/signup"
-              className="font-display text-sm text-stone-500 hover:text-black"
-            >
-              회원가입
-            </Link>
-          </nav>
-        </header>
+        <Header session={session} />
         <main className="mx-auto max-w-2xl px-4 py-10">{children}</main>
       </body>
     </html>

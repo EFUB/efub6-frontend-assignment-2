@@ -24,27 +24,32 @@ export default function ListItem({ result }: { result: (Post & { _id: string })[
           </Link>
           <span
             className="row-span-2 cursor-pointer rounded-md font-display px-2 py-1 text-sm text-stone-500 hover:text-red-500"
-            onClick={(e) => {
-              fetch("/api/post/delete", {
-                method: "DELETE",
-                body: result[i]._id.toString(),
-              })
-                .then((r) => r.json())
-                .then(() => {
-                  const target = e.target as HTMLElement;
-                  const parent = target.parentElement;
-                  if (parent) {
-                    parent.style.opacity = "0";
-                    setTimeout(() => {
-                      parent.style.display = "none";
-                    }, 1000);
-                  }
+            onClick={async (e) => {
+              const parent = e.currentTarget.parentElement;
+              try {
+                const r = await fetch("/api/post/delete", {
+                  method: "DELETE",
+                  body: result[i]._id.toString(),
                 });
+                const data = await r.json();
+                if (!r.ok) {
+                  alert(data.error ?? "삭제에 실패했습니다.");
+                  return;
+                }
+                if (parent) {
+                  parent.style.opacity = "0";
+                  setTimeout(() => {
+                    parent.style.display = "none";
+                  }, 1000);
+                }
+              } catch {
+                alert("삭제 중 오류가 발생했습니다.");
+              }
             }}
           >
             삭제
           </span>
-          <p className="mt-1 text-xs text-stone-400">1월 1일</p>
+          <p className="mt-1 text-xs text-stone-400">{result[i].authorName}</p>
         </div>
       ))}
     </div>

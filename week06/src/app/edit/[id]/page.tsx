@@ -2,6 +2,12 @@ import { ObjectId } from "mongodb";
 import { notFound } from "next/navigation";
 import { postCollection } from "@/utils/database";
 import PageNavButtons from "@/components/PageNavButtons";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/pages/api/auth/[...nextauth]";
+import { canModify } from "@/utils/auth";
+
+const messageClass =
+  "rounded-xl border-2 border-dashed border-[#f3e8c8] py-16 text-center text-sm text-stone-500";
 
 export default async function Edit({
   params,
@@ -13,6 +19,15 @@ export default async function Edit({
   const collection = await postCollection();
   const result = await collection.findOne({ _id: new ObjectId(id) });
   if (!result) notFound();
+
+  const session = await getServerSession(authOptions);
+  if (!session) {
+    return <p className={messageClass}>로그인 후 글을 수정할 수 있습니다.</p>;
+  }
+  if (!canModify(session, result)) {
+    return <p className={messageClass}>본인이 작성한 글만 수정할 수 있습니다.</p>;
+  }
+
   return (
     <div>
       <h4 className="mb-6 font-display text-3xl">수정 페이지</h4>
