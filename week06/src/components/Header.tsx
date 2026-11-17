@@ -4,12 +4,13 @@ import Link from "next/link";
 import type { Session } from "next-auth";
 import LoginButton from "./LoginButton";
 import LogoutButton from "./LogoutButton";
+import ThemeToggle, { type Theme } from "./ThemeToggle";
 
-type HeaderProps = { session: Session | null };
+type HeaderProps = { session: Session | null; theme: Theme };
 
 const linkClass = "font-display text-sm text-stone-500 hover:text-black";
 
-export default function Header({ session }: HeaderProps) {
+export default function Header({ session, theme }: HeaderProps) {
   return (
     <header className="bg-[#fbf6e4]">
       <nav className="mx-auto flex h-14 max-w-2xl items-center gap-6 px-4">
@@ -25,7 +26,7 @@ export default function Header({ session }: HeaderProps) {
           </Link>
         )}
 
-        <div className="ml-auto flex items-center gap-2">
+        <div className="ml-auto flex items-center gap-3 *:flex *:h-8 *:items-center *:leading-none">
           {session ? (
             <>
               {session.user?.image && (
@@ -49,6 +50,7 @@ export default function Header({ session }: HeaderProps) {
               <LoginButton />
             </>
           )}
+          <ThemeToggle initialTheme={theme} />
         </div>
       </nav>
     </header>

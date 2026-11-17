@@ -34,6 +34,14 @@ export default async function Detail({ params }: Props) {
         <p className="mt-2 text-sm text-stone-500">
           작성자: {post.authorName}
         </p>
+        {post.image && (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img
+            src={post.image}
+            alt={post.title}
+            className="mt-6 max-h-128 w-full rounded-lg border-2 border-[#f3e8c8] object-contain"
+          />
+        )}
         <p className="mt-4 whitespace-pre-wrap leading-relaxed text-black">
           {post.content}
         </p>

@@ -17,16 +17,23 @@ export default async function handler(
     return res.status(401).json({ error: "로그인이 필요합니다." });
   }
 
-  const { title, content } = req.body as Partial<Post>;
+  const { title, content, image } = req.body as Partial<Post>;
   if (!title?.trim() || !content?.trim()) {
     return res.status(400).json({ error: "제목과 내용을 모두 입력해주세요." });
   }
+
+  const bucket = process.env.AWS_BUCKET_NAME;
+  const isValidImage =
+    typeof image === "string" &&
+    image.startsWith(`https://${bucket}.s3.`) &&
+    image.includes("/images/");
 
   const post: Post = {
     title,
     content,
     author: session.user.email,
     authorName: session.user.name ?? "익명",
+    ...(isValidImage && { image }),
   };
 
   try {

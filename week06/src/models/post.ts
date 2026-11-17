@@ -3,4 +3,5 @@ export interface Post {
   content: string;
   author?: string;
   authorName?: string;
+  image?: string;
 }

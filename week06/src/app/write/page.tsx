@@ -1,6 +1,7 @@
 import PageNavButtons from "@/components/PageNavButtons";
 import { authOptions } from "@/pages/api/auth/[...nextauth]";
 import { getServerSession } from "next-auth";
+import ImageUpload from "./ImageUpload";
 
 export default async function Write() {
   const session = await getServerSession(authOptions);
@@ -35,6 +36,7 @@ export default async function Write() {
           rows={8}
           className="w-full resize-y border-b-2 border-[#f3e8c8] bg-white px-1 py-2.5 text-sm outline-none placeholder:text-stone-400 focus:border-[#e2cd94]"
         ></textarea>
+        <ImageUpload />
       </form>
       <PageNavButtons>
         <button
