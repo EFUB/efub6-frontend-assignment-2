@@ -1,0 +1,98 @@
+@import "tailwindcss";
+
+@theme inline {
+  --font-sans: var(--font-gowun-dodum), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-jua), var(--font-gowun-dodum), sans-serif;
+}
+
+@layer base {
+  body,
+  body * {
+    transition:
+      background-color 200ms,
+      border-color 200ms,
+      color 200ms;
+  }
+}
+
+body[data-theme="light"] {
+  background: white;
+  color: black;
+}
+
+body[data-theme="dark"] {
+  --dk-bg: #1a1814;
+  --dk-surface: #24211b;
+  --dk-header: #2b271f;
+  --dk-border: #3d372b;
+  --dk-border-strong: #8c7a4f;
+  --dk-accent: #e2cd94;
+  --dk-accent-hover: #f0dfae;
+  --dk-text: #eee7d6;
+  --dk-text-muted: #a9a08e;
+  --dk-text-faint: #7a7365;
+
+  background: var(--dk-bg);
+  color: var(--dk-text);
+  color-scheme: dark;
+}
+
+body[data-theme="light"] {
+  color-scheme: light;
+}
+
+body[data-theme="dark"],
+body[data-theme="dark"] .bg-white {
+  background-color: var(--dk-bg);
+}
+body[data-theme="dark"] main .bg-white {
+  background-color: var(--dk-surface);
+}
+body[data-theme="dark"] .bg-\[\#fbf6e4\] {
+  background-color: var(--dk-header);
+}
+body[data-theme="dark"] .hover\:bg-\[\#fbf6e4\]:hover {
+  background-color: var(--dk-header);
+}
+
+body[data-theme="dark"] .bg-\[\#f3e8c8\] {
+  background-color: var(--dk-accent);
+  color: var(--dk-bg);
+}
+body[data-theme="dark"] .hover\:bg-\[\#e2cd94\]:hover {
+  background-color: var(--dk-accent-hover);
+}
+
+body[data-theme="dark"] .border-\[\#f3e8c8\] {
+  border-color: var(--dk-border);
+}
+body[data-theme="dark"] .border-\[\#e2cd94\],
+body[data-theme="dark"] .hover\:border-\[\#e2cd94\]:hover,
+body[data-theme="dark"] .focus\:border-\[\#e2cd94\]:focus {
+  border-color: var(--dk-border-strong);
+}
+
+body[data-theme="dark"] .text-black {
+  color: var(--dk-text);
+}
+body[data-theme="dark"] .bg-\[\#f3e8c8\].text-black,
+body[data-theme="dark"] .bg-\[\#f3e8c8\] {
+  color: var(--dk-bg);
+}
+body[data-theme="dark"] .text-stone-500 {
+  color: var(--dk-text-muted);
+}
+body[data-theme="dark"] .text-stone-400,
+body[data-theme="dark"] .placeholder\:text-stone-400::placeholder {
+  color: var(--dk-text-faint);
+}
+body[data-theme="dark"] .hover\:text-black:hover {
+  color: #fff8e6;
+}
+body[data-theme="dark"] .hover\:text-red-500:hover {
+  color: #f87171;
+}
+
+body[data-theme="dark"] header {
+  border-bottom: 1px solid var(--dk-border);
+}
